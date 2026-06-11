@@ -1,0 +1,556 @@
+/* ========================================
+   Dashboard.css — AutoSense Dashboard Styles
+   ======================================== */
+
+/* ---------- Keyframes ---------- */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatNeon1 {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translate(100px, 100px) rotate(180deg); opacity: 0.8; }
+  100% { transform: translate(0, 0) rotate(360deg); opacity: 0.5; }
+}
+
+@keyframes floatNeon2 {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translate(-100px, -100px) rotate(-180deg); opacity: 0.8; }
+  100% { transform: translate(0, 0) rotate(-360deg); opacity: 0.5; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.8)); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Container ---------- */
+.dashboard-container {
+  background: linear-gradient(-45deg, #010002, #040008, #10091b, #260142);
+  background-size: 400% 400%;
+  animation: bgMove 12s ease infinite;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  text-align: center;
+  padding: 40px 30px;
+}
+
+/* ---------- Background Effects ---------- */
+.background-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neon-shape-1,
+.neon-shape-2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.neon-shape-1 {
+  width: 400px;
+  height: 400px;
+  background: #60318d;
+  top: -100px;
+  left: -100px;
+  animation: floatNeon1 15s infinite alternate ease-in-out;
+}
+
+.neon-shape-2 {
+  width: 500px;
+  height: 500px;
+  background: #5a575c;
+  bottom: -150px;
+  right: -100px;
+  animation: floatNeon2 18s infinite alternate ease-in-out;
+}
+
+/* ---------- Content Layer ---------- */
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Title ---------- */
+.dashboard-title {
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 0 10px rgba(71, 71, 71, 0.5);
+}
+
+/* ---------- Buttons ---------- */
+.start-btn {
+  padding: 15px 40px;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.start-btn:hover {
+  background: white;
+  color: #4c1d95;
+  box-shadow: 0 0 20px white, 0 0 40px #a855f7;
+  transform: translateY(-3px) scale(1.05);
+  border-color: white;
+}
+
+.stop-btn {
+  padding: 12px 25px;
+  margin-bottom: 20px;
+  background: rgba(239, 68, 68, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.stop-btn:hover {
+  background: rgba(239, 68, 68, 1);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+.view-btn {
+  padding: 15px 30px;
+  margin-top: 30px;
+  background: rgba(59, 130, 246, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.view-btn:hover {
+  background: rgba(59, 130, 246, 1);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ---------- Dashboard Grid ---------- */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+  max-width: 1100px;
+  margin-inline: auto;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.dashboard-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ---------- Card ---------- */
+.dashboard-card {
+  background: rgba(4, 5, 7, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 30px rgba(168, 85, 247, 0.25);
+}
+
+.card-title {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- Row Label ---------- */
+.row-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(167, 139, 250, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+/* ---------- Gauge Styles ---------- */
+.gauge-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gauge-svg {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.gauge-value-display {
+  margin-top: -10px;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gauge-unit {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* ---------- Chart Wrappers ---------- */
+.line-chart-wrapper {
+  width: 100%;
+  height: 180px;
+}
+
+.doughnut-chart-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.doughnut-center-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.doughnut-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.doughnut-unit {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: block;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px 12px;
+  }
+
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-title {
+    font-size: 1.3rem;
+  }
+
+  .gauge-value-display {
+    font-size: 1.5rem;
+  }
+
+  .line-chart-wrapper {
+    height: 150px;
+  }
+
+  .workflow-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .workflow-arrow-h {
+    transform: rotate(90deg);
+    margin: -10px 0;
+  }
+
+  .workflow-vertical-connector {
+    margin-left: 0;
+  }
+}
+
+/* =========================================
+   How This Works — Workflow Section
+   ========================================= */
+
+/* ── Keyframes for neon travel ── */
+@keyframes neonTravelH {
+  0%   { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: -200; }
+}
+
+@keyframes neonTravelL {
+  0%   { stroke-dashoffset: 900; }
+  100% { stroke-dashoffset: -900; }
+}
+
+@keyframes arrowHeadPulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+@keyframes boxGlow1 {
+  0%, 30%, 100% {
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.1), inset 0 0 8px rgba(34, 211, 238, 0.05);
+    border-color: rgba(34, 211, 238, 0.2);
+  }
+  15% {
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.5), 0 0 60px rgba(34, 211, 238, 0.2), inset 0 0 20px rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.6);
+  }
+}
+
+@keyframes boxGlow2 {
+  0%, 15%, 55%, 100% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.1), inset 0 0 8px rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+  35% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.5), 0 0 60px rgba(245, 158, 11, 0.2), inset 0 0 20px rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.6);
+  }
+}
+
+@keyframes boxGlow3 {
+  0%, 40%, 75%, 100% {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.1), inset 0 0 8px rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+  55% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.5), 0 0 60px rgba(16, 185, 129, 0.2), inset 0 0 20px rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.6);
+  }
+}
+
+@keyframes boxGlow4 {
+  0%, 60%, 100% {
+    box-shadow: 0 0 8px rgba(234, 179, 8, 0.1), inset 0 0 8px rgba(234, 179, 8, 0.05);
+    border-color: rgba(234, 179, 8, 0.2);
+  }
+  80% {
+    box-shadow: 0 0 25px rgba(234, 179, 8, 0.5), 0 0 60px rgba(234, 179, 8, 0.2), inset 0 0 20px rgba(234, 179, 8, 0.1);
+    border-color: rgba(234, 179, 8, 0.6);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Section ── */
+.how-it-works-section {
+  margin-top: 50px;
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.how-it-works-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  text-transform: none;
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+/* ── Workflow Container ── */
+.workflow-container {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Row (2 boxes + arrow) ── */
+.workflow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+}
+
+/* ── Boxes ── */
+.workflow-box {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 24px 22px;
+  text-align: left;
+  flex: 1;
+  max-width: 380px;
+  min-height: 200px;
+  transition: all 0.4s ease;
+}
+
+.workflow-box-1 {
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  animation: boxGlow1 4s ease-in-out infinite;
+}
+.workflow-box-2 {
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  animation: boxGlow2 4s ease-in-out infinite;
+}
+.workflow-box-3 {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  animation: boxGlow3 4s ease-in-out infinite;
+}
+.workflow-box-4 {
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  animation: boxGlow4 4s ease-in-out infinite;
+}
+
+.workflow-box-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  filter: grayscale(0.2);
+}
+
+.workflow-box-heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.workflow-box-desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.workflow-box-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workflow-box-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 5px;
+}
+
+.list-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Horizontal Arrow ── */
+.workflow-arrow-h {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arrow-svg-h {
+  width: 100%;
+  height: 40px;
+  overflow: visible;
+}
+
+/* ── L-shaped Connector ── */
+.workflow-l-connector {
+  width: 100%;
+  max-width: 950px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -5px 0;
+}
+
+.arrow-svg-l {
+  width: 100%;
+  height: 70px;
+  overflow: visible;
+}
+
+/* ── Neon Travel Animation ── */
+.neon-travel-h {
+  stroke-dasharray: 30 170;
+  animation: neonTravelH 2s linear infinite;
+}
+
+.neon-travel-l {
+  stroke-dasharray: 60 840;
+  animation: neonTravelL 3s linear infinite;
+  animation-delay: 1s;
+}
+
+.arrow-head-pulse {
+  animation: arrowHeadPulse 2s ease-in-out infinite;
+}

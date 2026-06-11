@@ -1,0 +1,800 @@
+/* ========================================
+   History.css — Previous History Page
+   Deep-space sci-fi / cyberpunk theme
+   Matches Analysis.css design language
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Keyframes (shared with Analysis.css) ---------- */
+
+@keyframes cosmicDrift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92) translateY(30px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,200,255,0.15), 0 0 60px rgba(0,100,255,0.08), inset 0 0 30px rgba(0,150,255,0.05); }
+  50%      { box-shadow: 0 0 35px rgba(0,200,255,0.25), 0 0 90px rgba(0,100,255,0.15), inset 0 0 40px rgba(0,150,255,0.08); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(0,180,255,0.3); }
+  50%      { border-color: rgba(0,220,255,0.6); }
+}
+
+@keyframes shimmerBar {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+@keyframes scanLine {
+  0%   { top: -2px; opacity: 1; }
+  100% { top: 102%; opacity: 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tabPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,180,255,0.2); }
+  50%      { box-shadow: 0 0 20px rgba(0,200,255,0.4); }
+}
+
+/* ---------- Page Container ---------- */
+.hist-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 50px 40px;
+  background: linear-gradient(135deg, #020b1a 0%, #0a1628 25%, #0d1f3c 50%, #081530 75%, #020b1a 100%);
+  background-size: 400% 400%;
+  animation: cosmicDrift 20s ease infinite;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Star particles */
+.hist-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 40% 40%, rgba(100,180,255,0.5), transparent),
+    radial-gradient(1px 1px at 60% 10%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(100,200,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 85% 30%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 15% 50%, rgba(150,200,255,0.3), transparent),
+    radial-gradient(1px 1px at 50% 90%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(100,180,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 75% 15%, rgba(150,220,255,0.4), transparent),
+    radial-gradient(1px 1px at 5% 95%, rgba(255,255,255,0.5), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nebula blobs */
+.hist-page::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(ellipse 600px 400px at 15% 80%, rgba(0,80,200,0.12), transparent),
+    radial-gradient(ellipse 500px 500px at 85% 20%, rgba(0,120,255,0.08), transparent),
+    radial-gradient(ellipse 300px 300px at 50% 50%, rgba(0,160,255,0.05), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Page Title ---------- */
+.hist-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+  text-shadow:
+    0 0 20px rgba(0,160,255,0.4),
+    0 0 50px rgba(0,120,255,0.15);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.hist-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(150,180,220,0.6);
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 0.8s ease-out 0.1s both;
+}
+
+/* ---------- Tab Switcher ---------- */
+.hist-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+  animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+.hist-tab-btn {
+  position: relative;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,180,255,0.2);
+  background: linear-gradient(135deg, rgba(8,25,50,0.7), rgba(4,15,35,0.85));
+  color: rgba(150,180,220,0.7);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.hist-tab-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.1), transparent);
+  animation: shimmerBar 4s ease-in-out infinite;
+}
+
+.hist-tab-btn:hover {
+  border-color: rgba(0,200,255,0.4);
+  color: rgba(200,230,255,0.9);
+  background: linear-gradient(135deg, rgba(0,40,80,0.5), rgba(0,20,50,0.7));
+}
+
+/* Active tab */
+.hist-tab-active {
+  border-color: rgba(0,200,255,0.5) !important;
+  background: linear-gradient(135deg, rgba(0,60,120,0.5), rgba(0,30,70,0.7)) !important;
+  color: #00d4ff !important;
+  text-shadow: 0 0 10px rgba(0,200,255,0.4);
+  animation: tabPulse 3s ease-in-out infinite;
+}
+
+.hist-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; width: 80%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.8), transparent);
+  box-shadow: 0 0 8px rgba(0,200,255,0.5);
+}
+
+/* ---------- Tab Content Wrapper ---------- */
+.hist-tab-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  align-self: center;
+  animation: fadeInScale 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* ---------- Loading ---------- */
+.hist-loading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 3rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  color: rgba(0,200,255,0.6);
+  text-transform: uppercase;
+}
+
+.hist-loading::before {
+  content: '';
+  width: 24px; height: 24px;
+  border: 2px solid rgba(0,180,255,0.15);
+  border-top-color: #00c8ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ---------- Stats Row ---------- */
+.hist-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+  animation: slideUp 0.5s ease-out 0.1s both;
+}
+
+.hist-stat-card {
+  background: linear-gradient(145deg, rgba(8,25,50,0.8), rgba(4,15,35,0.9));
+  border: 1px solid rgba(0,180,255,0.15);
+  border-radius: 14px;
+  padding: 18px 22px;
+  min-width: 130px;
+  text-align: center;
+  backdrop-filter: blur(14px);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hist-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,180,255,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hist-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0,200,255,0.35);
+  box-shadow: 0 8px 30px rgba(0,100,200,0.12), 0 0 20px rgba(0,150,255,0.08);
+}
+
+.hist-stat-card:hover::before { opacity: 1; }
+
+.hist-stat-warning { border-color: rgba(255,193,7,0.25); }
+.hist-stat-warning .hist-stat-value { color: #ffc107; text-shadow: 0 0 14px rgba(255,193,7,0.3); }
+.hist-stat-warning:hover { border-color: rgba(255,193,7,0.5); box-shadow: 0 8px 30px rgba(255,193,7,0.08); }
+
+.hist-stat-danger { border-color: rgba(255,68,68,0.25); }
+.hist-stat-danger .hist-stat-value { color: #ff4444; text-shadow: 0 0 14px rgba(255,68,68,0.3); }
+.hist-stat-danger:hover { border-color: rgba(255,68,68,0.5); box-shadow: 0 8px 30px rgba(255,68,68,0.08); }
+
+.hist-stat-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 0 0 12px rgba(0,200,255,0.2);
+}
+
+.hist-stat-small { font-size: 0.9rem; }
+
+.hist-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(150,180,220,0.65);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ---------- Actions Row ---------- */
+.hist-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  animation: slideUp 0.5s ease-out 0.15s both;
+}
+
+.hist-clear-btn {
+  position: relative;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,68,68,0.35);
+  background: linear-gradient(135deg, rgba(80,10,10,0.4), rgba(40,5,5,0.6));
+  color: #ff6666;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.hist-clear-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,80,80,0.12), transparent);
+  animation: shimmerBar 3s ease-in-out infinite;
+}
+
+.hist-clear-btn:hover {
+  border-color: rgba(255,68,68,0.7);
+  color: #ff4444;
+  background: linear-gradient(135deg, rgba(120,15,15,0.5), rgba(60,8,8,0.7));
+  box-shadow: 0 0 20px rgba(255,68,68,0.15), 0 0 40px rgba(255,30,30,0.08);
+  transform: translateY(-2px);
+}
+
+.hist-clear-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  animation: none;
+}
+
+.hist-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(120,150,190,0.5);
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Empty State ---------- */
+.hist-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(145deg, rgba(8,25,50,0.5), rgba(4,15,35,0.6));
+  border: 1px solid rgba(0,180,255,0.08);
+  border-radius: 16px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.hist-empty p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(100,140,180,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.hist-empty-sub {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  color: rgba(100,130,170,0.4) !important;
+  letter-spacing: 0.5px !important;
+  text-transform: none !important;
+  margin-top: 10px !important;
+}
+
+/* ---------- Alert List ---------- */
+.hist-alert-list,
+.hist-report-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideUp 0.5s ease-out 0.2s both;
+}
+
+/* ---------- Alert Card ---------- */
+.hist-alert-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(8,25,50,0.75), rgba(4,15,35,0.88));
+  border: 1px solid rgba(0,180,255,0.12);
+  border-radius: 16px;
+  padding: 22px 24px;
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: all 0.35s ease;
+  animation: fadeInScale 0.5s ease both;
+}
+
+/* Scanline on each card */
+.hist-alert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hist-alert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,80,160,0.12), 0 0 20px rgba(0,120,255,0.06);
+}
+
+.hist-alert-card:hover::before { opacity: 1; }
+
+/* Status-specific left border accent */
+.hist-card-warning {
+  border-left: 3px solid rgba(255,193,7,0.5);
+  border-color: rgba(255,193,7,0.2);
+}
+
+.hist-card-warning:hover {
+  border-color: rgba(255,193,7,0.4);
+  box-shadow: 0 8px 30px rgba(255,193,7,0.08);
+}
+
+.hist-card-critical {
+  border-left: 3px solid rgba(255,68,68,0.5);
+  border-color: rgba(255,68,68,0.2);
+}
+
+.hist-card-critical:hover {
+  border-color: rgba(255,68,68,0.4);
+  box-shadow: 0 8px 30px rgba(255,68,68,0.08);
+}
+
+.hist-card-good {
+  border-left: 3px solid rgba(45,255,110,0.5);
+  border-color: rgba(45,255,110,0.15);
+}
+
+.hist-card-good:hover {
+  border-color: rgba(45,255,110,0.35);
+  box-shadow: 0 8px 30px rgba(45,255,110,0.06);
+}
+
+/* ── Alert Header ── */
+.hist-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.hist-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.hist-alert-time {
+  font-family: 'Inter', sans-serif;
+  color: rgba(120,150,190,0.55);
+  font-size: 0.75rem;
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+.hist-alert-id {
+  font-family: 'Orbitron', sans-serif;
+  color: rgba(80,110,150,0.45);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+/* ── Alert Metrics ── */
+.hist-alert-metrics {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.hist-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hist-metric-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 500;
+  color: rgba(120,150,190,0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.hist-metric-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,200,255,0.15);
+}
+
+.hist-metric-value.good    { color: #2dff6e; text-shadow: 0 0 10px rgba(45,255,110,0.3); }
+.hist-metric-value.warning { color: #ffc107; text-shadow: 0 0 10px rgba(255,193,7,0.3); }
+.hist-metric-value.danger  { color: #ff4444; text-shadow: 0 0 10px rgba(255,68,68,0.3); }
+
+/* ── Alert Anomalies & Faults ── */
+.hist-alert-anomalies,
+.hist-alert-faults {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hist-anomaly-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #ffc107;
+  background: rgba(255,193,7,0.07);
+  border: 1px solid rgba(255,193,7,0.22);
+  transition: all 0.25s ease;
+}
+
+.hist-anomaly-tag:hover {
+  background: rgba(255,193,7,0.14);
+  border-color: rgba(255,193,7,0.45);
+}
+
+.hist-fault-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #fb923c;
+  background: rgba(249,115,22,0.08);
+  border: 1px solid rgba(249,115,22,0.25);
+  transition: all 0.25s ease;
+}
+
+.hist-fault-tag:hover {
+  background: rgba(249,115,22,0.16);
+  border-color: rgba(249,115,22,0.5);
+}
+
+.hist-faults-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(120,150,190,0.5);
+  align-self: center;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Report Card ---------- */
+.hist-report-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(8,25,50,0.75), rgba(4,15,35,0.88));
+  border: 1px solid rgba(0,180,255,0.15);
+  border-radius: 16px;
+  padding: 26px 28px;
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: all 0.35s ease;
+  animation: fadeInScale 0.5s ease both;
+}
+
+.hist-report-card::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.5), transparent);
+  animation: scanLine 5s linear infinite;
+}
+
+.hist-report-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; width: 80%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.2), transparent);
+}
+
+.hist-report-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168,85,247,0.35);
+  box-shadow: 0 8px 30px rgba(100,50,200,0.12), 0 0 30px rgba(168,85,247,0.08);
+}
+
+/* ── Report Header ── */
+.hist-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(168,85,247,0.12);
+}
+
+.hist-report-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #c084fc;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(168,85,247,0.35);
+}
+
+/* ── Report Grid ── */
+.hist-report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.hist-report-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.025);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.25s ease;
+}
+
+.hist-report-stat:hover {
+  background: rgba(0,100,200,0.06);
+  border-color: rgba(0,180,255,0.1);
+}
+
+/* ── Report Status Bar ── */
+.hist-report-bar-wrapper {
+  margin-bottom: 14px;
+}
+
+.hist-report-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 8px;
+}
+
+/* reuse fr-bar-segment classes from Analysis.css */
+.fr-bar-segment { height: 100%; transition: width 0.8s cubic-bezier(0.25,0.8,0.25,1); }
+.fr-bar-good     { background: linear-gradient(90deg,#1aff6e,#2dff6e); box-shadow: 0 0 10px rgba(45,255,110,0.3); }
+.fr-bar-warning  { background: linear-gradient(90deg,#ffb300,#ffc107); box-shadow: 0 0 10px rgba(255,193,7,0.3); }
+.fr-bar-critical { background: linear-gradient(90deg,#ff3333,#ff4444); box-shadow: 0 0 10px rgba(255,68,68,0.3); }
+
+.hist-bar-labels {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hist-bar-labels span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.fr-label-good     { color: #2dff6e; }
+.fr-label-warning  { color: #ffc107; }
+.fr-label-critical { color: #ff4444; }
+
+/* ── Report Footer ── */
+.hist-report-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ---------- Back Button (matches Analysis.css exactly) ---------- */
+.back-button-wrapper {
+  position: relative;
+  z-index: 2;
+  margin-top: 40px;
+  align-self: center;
+  animation: slideUp 0.6s ease-out 0.3s both;
+}
+
+.back-button {
+  position: relative;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(8,25,50,0.9), rgba(4,15,35,0.95));
+  border: 1.5px solid rgba(0,180,255,0.35);
+  border-radius: 8px;
+  padding: 14px 70px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 15px rgba(0,150,255,0.1);
+}
+
+.back-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.15), transparent);
+  animation: shimmerBar 3s ease-in-out infinite;
+}
+
+.back-button:hover {
+  border-color: rgba(0,220,255,0.7);
+  box-shadow:
+    0 0 25px rgba(0,180,255,0.25),
+    0 0 60px rgba(0,120,255,0.1),
+    inset 0 0 20px rgba(0,180,255,0.05);
+  transform: translateY(-2px);
+  color: #00d4ff;
+}
+
+.back-button:active { transform: translateY(0); }
+
+.btn-corner {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-color: rgba(0,200,255,0.5);
+  border-style: solid;
+  transition: border-color 0.35s ease;
+}
+
+.btn-corner--tl { top: -1px; left: -1px;   border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.btn-corner--tr { top: -1px; right: -1px;  border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+.btn-corner--bl { bottom: -1px; left: -1px;  border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+.btn-corner--br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+.back-button:hover .btn-corner { border-color: rgba(0,220,255,0.9); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hist-page { padding: 30px 20px; }
+  .hist-title { font-size: 1.1rem; letter-spacing: 3px; }
+  .hist-tabs { flex-wrap: wrap; }
+  .hist-tab-btn { padding: 10px 18px; font-size: 0.68rem; }
+  .hist-stats-row { gap: 10px; }
+  .hist-stat-card { min-width: 100px; padding: 14px 16px; }
+  .hist-stat-value { font-size: 1.4rem; }
+  .hist-report-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .hist-alert-metrics { gap: 18px; }
+  .back-button { padding: 12px 50px; font-size: 0.85rem; }
+}
+
+@media (max-width: 480px) {
+  .hist-page { padding: 24px 12px; }
+  .hist-title { font-size: 0.9rem; letter-spacing: 2px; }
+  .hist-tab-btn { padding: 8px 14px; font-size: 0.62rem; letter-spacing: 1px; }
+  .hist-report-grid { grid-template-columns: 1fr; }
+  .hist-alert-metrics { flex-direction: column; gap: 10px; }
+  .hist-stat-value { font-size: 1.2rem; }
+  .back-button { padding: 12px 36px; font-size: 0.8rem; letter-spacing: 3px; }
+}
