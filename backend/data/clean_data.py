@@ -147,7 +147,7 @@ def print_summary(df: pd.DataFrame) -> None:
 # ─────────────────────────────────────────────
 def main():
     # File paths
-    INPUT_PATH  = "C:/Users/hrish/AutoSense/backend/data/live1.csv"
+    INPUT_PATH  = "C:/Users/hrish/AutoSense/backend/data/live2.csv"
     OUTPUT_PATH = "C:/Users/hrish/AutoSense/backend/data/cleaned_data.csv"
 
     # Run all cleaning steps in order
