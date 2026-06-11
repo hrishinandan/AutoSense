@@ -50,9 +50,9 @@ STATUS_GOOD_MIN     = 75   # health_score ≥ 75  → Good
 STATUS_WARNING_MIN  = 40   # health_score ≥ 40  → Warning  (else Critical)
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # CLASS: VehicleAnalyzer
-# ─────────────────────────────────────────────────────────────────
+
 
 class VehicleAnalyzer:
     """
@@ -91,9 +91,9 @@ class VehicleAnalyzer:
         print(f"[Analyzer] Initialised with {len(self._rules)} rule(s) loaded.")
 
 
-    # ─────────────────────────────────────────────────────────────
+
     # PUBLIC METHOD: analyze
-    # ─────────────────────────────────────────────────────────────
+    
 
     def analyze(self, data: dict, faults: list) -> dict:
         """
@@ -125,18 +125,18 @@ class VehicleAnalyzer:
         health_score = 100
         anomalies    = []
 
-        # ── 1. Rule-based checks ──────────────────────────────────
+        # 1. Rule-based checks 
         for rule in self._rules:
             triggered, message = rule["check"](data)
             if triggered:
                 anomalies.append(message)
                 health_score -= PENALTY_PER_RULE
 
-        # ── 2. Injected fault penalty ─────────────────────────────
+        # 2. Injected fault penalty
         # Captures faults that haven't yet crossed a hard threshold.
         health_score -= len(faults) * PENALTY_PER_FAULT
 
-        # ── 3. ML anomaly detection ───────────────────────────────
+        # 3. ML anomaly detection
         ml_result = self.anomaly_detector.predict(data)
         if ml_result["is_anomaly"]:
             anomalies.append("ML Anomaly Detected")
@@ -184,10 +184,10 @@ class VehicleAnalyzer:
         }
 
 
-    # ─────────────────────────────────────────────────────────────
+    
     # PRIVATE RULE CHECKERS
     # Each returns (triggered: bool, detail_message: str)
-    # ─────────────────────────────────────────────────────────────
+   
 
     def _check_overheating(self, data: dict) -> tuple:
         """Rule: Coolant temperature above safe operating limit (>110 °C)."""
@@ -264,9 +264,8 @@ class VehicleAnalyzer:
         return False, ""
 
 
-    # ─────────────────────────────────────────────────────────────
     # PRIVATE HELPERS
-    # ─────────────────────────────────────────────────────────────
+   
 
     @staticmethod
     def _calculate_failure_probability(health_score: int,
@@ -311,9 +310,9 @@ class VehicleAnalyzer:
         return None
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # QUICK TEST – runs only when this file is executed directly
-# ─────────────────────────────────────────────────────────────────
+
 
 def _print_report(report: dict) -> None:
     """Pretty-print an analysis report."""

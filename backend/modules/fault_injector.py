@@ -31,9 +31,8 @@ import copy
 import random
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # CLASS: FaultInjector
-# ─────────────────────────────────────────────────────────────────
 
 class FaultInjector:
     """
@@ -69,9 +68,9 @@ class FaultInjector:
         print("[FaultInjector] Initialised with "
               f"{len(self._fault_handlers)} fault type(s) registered.")
 
-    # ─────────────────────────────────────────────────────────────
+    
     # PUBLIC METHOD: inject_fault
-    # ─────────────────────────────────────────────────────────────
+    
 
     def inject_fault(self, data: dict) -> dict:
         """
@@ -114,10 +113,10 @@ class FaultInjector:
 
         return {"data": modified_data, "faults": injected_faults}
 
-    # ─────────────────────────────────────────────────────────────
+    
     # PRIVATE FAULT HANDLERS
     # Each method receives the data dict, modifies a copy, returns it.
-    # ─────────────────────────────────────────────────────────────
+
 
     def _fault_overheating(self, data: dict) -> dict:
         """
@@ -218,9 +217,9 @@ class FaultInjector:
                 data[key] = random.uniform(1.2, 1.5)   # rich
         return data
 
-    # ─────────────────────────────────────────────────────────────
+    
     # HELPER METHOD: _find_key
-    # ─────────────────────────────────────────────────────────────
+  
 
     @staticmethod
     def _find_key(data: dict, candidates: list) -> str | None:
@@ -247,9 +246,9 @@ class FaultInjector:
         return None
 
 
-# ─────────────────────────────────────────────────────────────────
+
 # QUICK TEST – runs only when this file is executed directly
-# ─────────────────────────────────────────────────────────────────
+
 
 if __name__ == "__main__":
     # Minimal synthetic telemetry row that mirrors cleaned_data.csv columns
